@@ -1,0 +1,12 @@
+# Ignore the database files
+*.db
+*.sqlite
+postgres_data/
+
+# Ignore virtual environments
+venv/
+__pycache__/
+
+# Ignore Git history
+.git/
+.gitignore

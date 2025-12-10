@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>Warehouse Dashboard</title></head>
+<body>
+    <h1>Warehouse Manager</h1>
+    
+    <h3>Add a Location</h3>
+    <form action="/" method="POST">
+        <input type="text" name="location_name" placeholder="Location Name (e.g. Zone A)">
+        <input type="submit" value="Add Location">
+    </form>
+
+    <hr>
+    
+    <a href="/add_product">Go to Add Products Page</a>
+
+    <h3>Current Inventory:</h3>
+    <ul>
+        {% for loc in locations %}
+            <li>
+                <strong>{{ loc.name }}</strong> (ID: {{ loc.id }})
+            
+                <ul>
+                    {% for product in loc.products %}
+    
+                        <li>{{ product.name }} (Qty: {{ product.quantity }})</li>
+                    {% endfor %}
+                </ul>
+            
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Product</title></head>
+<body>
+    <h1>Add New Product</h1>
+
+    <form action="/add_product" method="POST">
+        <input type="text" name="product_name" placeholder="Product Name"><br>
+        <input type="number" name="product_quantity" placeholder="Quantity"><br>
+        
+        <label>Select Warehouse:</label>
+        <select name="location_id">
+            {% for loc in locations %}
+                <option value="{{ loc.id }}">{{ loc.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Save Product">
+    </form>
+</body>
+</html>
