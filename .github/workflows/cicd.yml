@@ -44,7 +44,7 @@ jobs:
           git pull origin main
           docker compose down
           docker compose up -d --build
-	  echo "waiting for 10 secs.."
-	  sleep 15          
+		echo "waiting for 10 secs.."
+		sleep 15          
 	  # Optional: Run DB init again just in case schemas changed
-          docker compose exec -T web python -c "from app import db, app; app.app_context().push(); db.create_all()"
+		docker compose exec -T web python -c "from app import db, app; app.app_context().push(); db.create_all()"
