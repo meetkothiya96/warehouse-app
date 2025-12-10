@@ -26,3 +26,23 @@ jobs:
     - name: Run Tests
       run: |
         python tests.py
+
+# JOB 2: DEPLOY TO AWS (Only runs if 'test' passes)
+  deploy:
+    needs: test  # <--- The Magic Link! Wait for test to succeed.
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy to AWS
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.AWS_HOST }}
+        username: ${{ secrets.AWS_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd warehouse-app
+          git pull origin main
+          docker compose down
+          docker compose up -d --build
+          # Optional: Run DB init again just in case schemas changed
+          docker compose exec -T web python -c "from app import db, app; app.app_context().push(); db.create_all()"
